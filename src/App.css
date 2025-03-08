@@ -1,0 +1,29 @@
+
+
+.bkimgheader{
+  background-image: url("./assets/img/Header.jpg");
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.contpizza{
+  display: flex;
+  justify-content: space-evenly;
+  margin: 30px;
+}
+
+.pizacard{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 20%;
+  img{
+    width: 100%;
+  }
+}
+.ftr{
+  height: 80px;
+}

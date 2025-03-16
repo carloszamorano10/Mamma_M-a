@@ -1,14 +1,13 @@
 import { useState } from "react"
+import React from 'react'
 import Swal from 'sweetalert2'
 
-const Register = () => {
+const Login = () => {
 
     const [form, setForm] = useState({
         email: '',
         password: '',
-        pass: ''
     })
-
 
 
     const handleChange = (event)=>{
@@ -20,7 +19,7 @@ const Register = () => {
 
    const handleSubmit = (e) =>{
      e.preventDefault()
-     if (form.email === "" || form.password === "" || form.pass === "") {
+     if (form.email === "" || form.password === "") {
         Swal.fire({
             icon: "error",
             title: "Oops...",
@@ -36,14 +35,6 @@ const Register = () => {
           });
         return;
       }
-      if (form.password !== form.pass) {
-        Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Ambas contraseñas deben ser iguales",
-          });
-        return;
-      }
       Swal.fire({
         icon: "success",
         text: "Registro exitoso",
@@ -53,7 +44,7 @@ const Register = () => {
   return (
     <>
     <div class="d-flex flex-column align-items-center py-3">
-        <h1>Register</h1>
+        <h1>Login</h1>
         <div>
             <div class="input-group mb-3">
                  <span class="input-group-text" id="inputGroup-sizing-default">Email</span>
@@ -77,25 +68,15 @@ const Register = () => {
                  onChange={handleChange}
                  />
             </div>
-            <div class="input-group mb-3">
-                 <span class="input-group-text" id="inputGroup-sizing-default">Confirmar contraseña</span>
-                 <input type="password" 
-                 class="form-control" 
-                 aria-label="Sizing example input" 
-                 aria-describedby="inputGroup-sizing-default" 
-                 name="pass"
-                 value={form.pass}
-                 onChange={handleChange}
-                 />
-            </div>
+       
             
         </div>
         <button onClick={handleSubmit} class="btn btn-primary">Enviar</button>
-       
+
     </div>
     
     </>
   )
 }
 
-export default Register
+export default Login

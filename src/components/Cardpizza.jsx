@@ -7,7 +7,14 @@ function Cardpizza({name,price,ingredients,img}) {
    <img src={img} alt="pizza" />
    <h1>{name}</h1>
    <h3>Ingredientes:</h3>
-   <p className='m-1 text-center'>🍕{ingredients.join(', ')}</p>
+   <div className='m-1 text-center'>
+        🍕
+        <ul>
+          {ingredients.map((ingredient, index) => (
+            <li key={index}>{ingredient}</li>
+          ))}
+        </ul>
+      </div>
    <p>Precio: ${price}</p>
    <div>
   <button className='btn btn-ligth btn-outline-secondary btn-sm m-1'>Ver Mas</button>

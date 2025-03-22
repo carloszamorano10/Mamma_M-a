@@ -1,4 +1,5 @@
 import './App.css'
+import Cart from './components/Cart'
 import Footer from './components/Footer'
 import Home from './components/Home'
 import Login from './components/Login'
@@ -14,7 +15,8 @@ function App() {
      <Navbar />
      {/*<Home />*/}
      {/*<Register />*/}
-     <Login />
+     {/*<Login />*/}
+     <Cart />
      <Footer />
     </>
   )

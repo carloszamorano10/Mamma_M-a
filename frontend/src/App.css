@@ -31,3 +31,13 @@
 .ftr{
   height: 14vh;
 }
+.notfound{
+  display: flex;
+  justify-content: center;
+  background-color: rgba(19,30,58,255);
+  padding: 40px;
+  text-decoration: none;
+  font-size: xx-large;
+  font-weight: 500;
+  color: rgba(253,132,0,255);
+}

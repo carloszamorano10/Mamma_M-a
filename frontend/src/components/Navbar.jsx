@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
+import { GlobalContext } from '../context/GlobalContext';
 
 
 
 function Navbar() {
+  const { totalCart } = useContext(GlobalContext)
    const total = 25000;
    const token = false;
   return (
@@ -41,7 +43,7 @@ function Navbar() {
       
     </div>
         <li class="nav-item d-flex justify-content-end ">
-          <Link class="nav-link text-light" to="/cart">🛒Total: {total}</Link>
+          <Link class="nav-link text-light" to="/cart">🛒Total: {totalCart}</Link>
         </li>      
   </div>
 </nav>

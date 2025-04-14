@@ -1,6 +1,7 @@
 import { useState } from "react"
 import React from 'react'
 import Swal from 'sweetalert2'
+import { useNavigate } from "react-router-dom"
 
 const Login = () => {
 
@@ -9,6 +10,7 @@ const Login = () => {
         password: '',
     })
 
+    const navegar = useNavigate();
 
     const handleChange = (event)=>{
         setForm({
@@ -38,7 +40,9 @@ const Login = () => {
       Swal.fire({
         icon: "success",
         text: "Registro exitoso",
-      });
+      })
+      navegar("/")
+      ;
    }
 
   return (

@@ -1,16 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Header from "../components/Header";
 import Cardpizza from "../components/Cardpizza";
+import { GlobalContext } from "../context/GlobalContext";
+
 
 function Home() {
-  const [pizzalist, setPizzaslist] = useState([]);
-
-  const getPizzas = async () => {
-    const response = await fetch("http://localhost:5000/api/pizzas");
-    const data = await response.json();
-    console.log(data);
-    setPizzaslist(data);
-  };
+  const { pizzalist, getPizzas } = useContext(GlobalContext)
 
   useEffect(() => {
     getPizzas();
@@ -24,6 +19,7 @@ function Home() {
         {pizzalist.map((pizza) => (
           <Cardpizza
             key={pizza.id}
+            id={pizza.id}
             name={pizza.name}
             price={pizza.price}
             ingredients={pizza.ingredients}

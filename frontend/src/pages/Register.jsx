@@ -1,7 +1,13 @@
-import { useState } from "react"
+
 import Swal from 'sweetalert2'
+import { useNavigate } from "react-router-dom"
+
 
 const Register = () => {
+
+
+
+  
 
     const [form, setForm] = useState({
         email: '',
@@ -9,7 +15,7 @@ const Register = () => {
         pass: ''
     })
 
-
+    const navegar = useNavigate();
 
     const handleChange = (event)=>{
         setForm({
@@ -47,18 +53,21 @@ const Register = () => {
       Swal.fire({
         icon: "success",
         text: "Registro exitoso",
-      });
+      })
+      navegar("/")
+      
+      ;
    }
 
   return (
     <>
-    <div class="d-flex flex-column align-items-center py-3">
+    <div className="d-flex flex-column align-items-center py-3">
         <h1>Register</h1>
         <div>
-            <div class="input-group mb-3">
-                 <span class="input-group-text" id="inputGroup-sizing-default">Email</span>
+            <div className="input-group mb-3">
+                 <span className="input-group-text" id="inputGroup-sizing-default">Email</span>
                  <input type="email" 
-                 class="form-control" 
+                 className="form-control" 
                  aria-label="Sizing example input" 
                  aria-describedby="inputGroup-sizing-default" 
                  name="email" 
@@ -66,10 +75,10 @@ const Register = () => {
                  onChange={handleChange}
                  />
             </div>
-            <div class="input-group mb-3">
-                 <span class="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
+            <div className="input-group mb-3">
+                 <span className="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
                  <input type="password" 
-                 class="form-control" 
+                 className="form-control" 
                  aria-label="Sizing example input" 
                  aria-describedby="inputGroup-sizing-default" 
                  name="password"
@@ -77,10 +86,10 @@ const Register = () => {
                  onChange={handleChange}
                  />
             </div>
-            <div class="input-group mb-3">
-                 <span class="input-group-text" id="inputGroup-sizing-default">Confirmar contraseña</span>
+            <div className="input-group mb-3">
+                 <span className="input-group-text" id="inputGroup-sizing-default">Confirmar contraseña</span>
                  <input type="password" 
-                 class="form-control" 
+                 className="form-control" 
                  aria-label="Sizing example input" 
                  aria-describedby="inputGroup-sizing-default" 
                  name="pass"
@@ -90,7 +99,7 @@ const Register = () => {
             </div>
             
         </div>
-        <button onClick={handleSubmit} class="btn btn-primary">Enviar</button>
+        <button onClick={handleSubmit} className="btn btn-primary">Enviar</button>
        
     </div>
     

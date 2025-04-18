@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { GlobalContext } from '../context/GlobalContext';
 
 
@@ -11,31 +11,31 @@ function Navbar() {
   return (
 <nav class="navbar navbar-expand-lg bg-body-tertiary pt-0 pb-0">
   <div class="container-fluid bg-dark p-3">
-    <Link class="navbar-brand text-light" to="/">Pizzería Mamma Mía</Link>
+    <NavLink class="navbar-brand text-light" to="/">Pizzería Mamma Mía</NavLink>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <Link class="nav-link active text-light" aria-current="page" to="/">🍕Home</Link>
+          <NavLink className={({ isActive })=> (isActive ? "text-primary-emphasis" : "text-secondary")} text-light aria-current="page" to="/">🍕Home</NavLink>
         </li>
 
         {token ? 
        <>
        <li class="nav-item">
-          <Link class="nav-link text-light" to="/profile">🪪Profile</Link>
+          <NavLink className={({ isActive })=> (isActive ? "text-primary-emphasis" : "text-secondary")} text-light to="/profile">🪪Profile</NavLink>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="#">🔓Log Out</a>
+          <NavLink className={({ isActive })=> (isActive ? "text-primary-emphasis" : "text-secondary")} text-light href="#">🔓Log Out</NavLink>
         </li>
        </> :
        <>
        <li class="nav-item">
-          <Link class="nav-link text-light" to="/login">🔒Login</Link>
+          <NavLink className={({ isActive })=> (isActive ? "text-primary-emphasis" : "text-secondary")} text-light to="/login">🔒Login</NavLink>
         </li>
         <li class="nav-item">
-          <Link class="nav-link text-light" to="/register">🔒Register</Link>
+          <NavLink className={({ isActive })=> (isActive ? "text-primary-emphasis" : "text-secondary")} text-light to="/register">🔒Register</NavLink>
         </li>
        </>   
     }
@@ -43,7 +43,7 @@ function Navbar() {
       
     </div>
         <li class="nav-item d-flex justify-content-end ">
-          <Link class="nav-link text-light" to="/cart">🛒Total: {totalCart}</Link>
+          <NavLink class="nav-link text-light" to="/cart">🛒Total: {totalCart}</NavLink>
         </li>      
   </div>
 </nav>

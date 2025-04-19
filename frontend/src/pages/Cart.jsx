@@ -3,7 +3,7 @@ import { GlobalContext } from '../context/GlobalContext';
 import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
-  const { carrito, setCarrito } = useContext(GlobalContext);
+  const { carrito, setCarrito, userIsLogged } = useContext(GlobalContext);
   const [isProcessing, setIsProcessing] = useState(false);
   const navigate = useNavigate();
 
@@ -20,6 +20,7 @@ const Cart = () => {
       }).filter(Boolean)
     );
   };
+
 
   const handleCheckout = async () => {
     setIsProcessing(true);
@@ -158,17 +159,8 @@ const Cart = () => {
               <button 
                 className="btn btn-primary w-100 py-3 fw-bold"
                 onClick={handleCheckout}
-                disabled={isProcessing}
-              >
-                {isProcessing ? (
-                  <>
-                    <span className="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
-                    Procesando...
-                  </>
-                ) : (
-                  'Pagar Ahora'
-                )}
-              </button>
+                disabled={!userIsLogged}
+              >Pagar Ahora</button>
               
               <button 
                 className="btn btn-outline-primary w-100 mt-2"

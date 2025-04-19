@@ -1,7 +1,8 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import React from 'react'
 import Swal from 'sweetalert2'
 import { useNavigate } from "react-router-dom"
+import { GlobalContext } from "../context/GlobalContext"
 
 const Login = () => {
 
@@ -9,7 +10,7 @@ const Login = () => {
         email: '',
         password: '',
     })
-
+    const {setUser, setUserIsLogged} = useContext(GlobalContext)
     const navegar = useNavigate();
 
     const handleChange = (event)=>{
@@ -41,8 +42,10 @@ const Login = () => {
         icon: "success",
         text: "Registro exitoso",
       })
-      navegar("/")
-      ;
+      setUser({email: form.email, password: form.password});
+      setUserIsLogged(true);
+      navegar("/");
+      
    }
 
   return (

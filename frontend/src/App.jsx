@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Cart from "./pages/Cart";
@@ -10,9 +10,10 @@ import Register from "./pages/Register";
 import Pizza from "./pages/Pizza";
 import { Profile } from "./components/Profile";
 import { NotFound } from "./components/NotFound";
+import { GlobalContext } from "./context/GlobalContext";
 
 function App() {
-  const userIsLogged = false;
+  const {userIsLogged} = useContext(GlobalContext)
 
   return (
     <>

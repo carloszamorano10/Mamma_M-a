@@ -1,19 +1,21 @@
 
 import Swal from 'sweetalert2'
 import { useNavigate } from "react-router-dom"
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { GlobalContext } from '../context/GlobalContext';
 
 
 const Register = () => {
 
 
-
+  const {setUser, setUserIsLogged, setDireccion} = useContext(GlobalContext)
   
 
     const [form, setForm] = useState({
         email: '',
         password: '',
-        pass: ''
+        pass: '',
+        direccion:''
     })
 
     const navegar = useNavigate();
@@ -55,7 +57,10 @@ const Register = () => {
         icon: "success",
         text: "Registro exitoso",
       })
-      navegar("/")
+      setUser({email: form.email, password: form.password});
+      setUserIsLogged(true);
+      setDireccion({direccion: form.direccion})
+      navegar("/");
       
       ;
    }
@@ -95,6 +100,17 @@ const Register = () => {
                  aria-describedby="inputGroup-sizing-default" 
                  name="pass"
                  value={form.pass}
+                 onChange={handleChange}
+                 />
+            </div>
+            <div className="input-group mb-3">
+                 <span className="input-group-text" id="inputGroup-sizing-default">Dirección</span>
+                 <input type="text" 
+                 className="form-control" 
+                 aria-label="Sizing example input" 
+                 aria-describedby="inputGroup-sizing-default" 
+                 name="direccion"
+                 value={form.direccion}
                  onChange={handleChange}
                  />
             </div>

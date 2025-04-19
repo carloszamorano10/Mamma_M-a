@@ -5,9 +5,8 @@ import { GlobalContext } from '../context/GlobalContext';
 
 
 function Navbar() {
-  const { totalCart } = useContext(GlobalContext)
-   const total = 25000;
-   const token = false;
+  const { totalCart, userIsLogged } = useContext(GlobalContext)
+
    const validaRoot = ({ isActive }) => isActive? "text-decoration-none text-warning" : "text-decoration-none text-light"
   return (
 <nav class="navbar navbar-expand-lg bg-body-tertiary pt-0 pb-0">
@@ -22,7 +21,7 @@ function Navbar() {
           <NavLink className={validaRoot} text-light aria-current="page" to="/">🍕Home</NavLink>
         </li>
 
-        {token ? 
+        {userIsLogged ? 
        <>
        <li class="nav-item">
           <NavLink className={validaRoot} text-light to="/profile">🪪Profile</NavLink>

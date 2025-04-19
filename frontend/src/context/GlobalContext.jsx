@@ -1,4 +1,4 @@
-import { createContext,useState } from "react";
+import { createContext,use,useState } from "react";
 
 export const GlobalContext = createContext();
 
@@ -6,6 +6,9 @@ const GlobalProvider = ({children}) => {
     
     const [carrito, setCarrito] = useState([]);
     const [pizzalist, setPizzaslist] = useState([]);
+    const [user, setUser] = useState("");
+    const [userIsLogged, setUserIsLogged] = useState(false);
+    const [direccion, setDireccion] = useState({});
    
      const getPizzas = async () => {
        const response = await fetch("http://localhost:5000/api/pizzas");
@@ -24,7 +27,7 @@ const GlobalProvider = ({children}) => {
   
 
     return(
-        <GlobalContext.Provider value={{pizzalist, getPizzas, carrito, setCarrito, totalCart}}>
+        <GlobalContext.Provider value={{pizzalist, getPizzas, carrito, setCarrito, totalCart, user, setUser, userIsLogged, setUserIsLogged, direccion, setDireccion}}>
             {children}
         </GlobalContext.Provider>
     )

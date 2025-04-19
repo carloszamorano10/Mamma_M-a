@@ -1,11 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
 
 function Cardpizza({ id, name, price, ingredients, img }) {
   const { setCarrito, carrito } = useContext(GlobalContext);
   const [isAdding, setIsAdding] = useState(false);
+  const navigate = useNavigate(); 
 
   const handleAdd = async () => {
     setIsAdding(true);
@@ -35,7 +37,10 @@ function Cardpizza({ id, name, price, ingredients, img }) {
     
     setIsAdding(false);
   };
-
+  
+  const irPizza = ()=> {
+    navigate(`/pizza/${id}`);
+  }
   return (
     <div className='pizza-card card h-100 shadow-sm hover-shadow'>
       <div className='card-img-top position-relative'>
@@ -82,6 +87,7 @@ function Cardpizza({ id, name, price, ingredients, img }) {
               'Añadir al Carrito'
             )}
           </button>
+          <button  className='btn btn-dark' onClick={irPizza}>Ver más</button>
         </div>
       </div>
     </div>

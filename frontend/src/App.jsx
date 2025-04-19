@@ -7,7 +7,6 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
 import Register from "./pages/Register";
-import Register2 from "./components/Register2";
 import Pizza from "./pages/Pizza";
 import { Profile } from "./components/Profile";
 import { NotFound } from "./components/NotFound";
@@ -24,8 +23,7 @@ function App() {
         <Route path="/cart" element={<Cart />}/>
         <Route path="/login" element={<Login />}/>
         <Route path="/register" element={<Register />}/>
-        <Route path="/register2/:id" element={<Register2 />}/>
-        <Route path="/pizza/p001" element={<Pizza />}/>
+        <Route path="/pizza/:id" element={<Pizza />}/>
         <Route path="/profile" 
         element={userIsLogged ? <Profile /> : <Navigate to={"/login"}></Navigate>}/>
         <Route path="/*" element={<NotFound />}/>

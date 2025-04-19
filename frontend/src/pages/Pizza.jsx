@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 
 
 const Pizza = () => {
   const {id} = useParams()
-
-  console.log(id)
+  const navegar = useNavigate();
+  const volver = ()=>{
+    navegar("/")
+  }
+   console.log(id)
 
     const[ pizzalist, setPizzaslist]= useState([])
     
@@ -31,7 +34,7 @@ const Pizza = () => {
           <h5 className="card-title">Pizza {pizzalist.name}</h5>
           <h5 className="card-title">${pizzalist.price}</h5>
           <p className="card-text">{pizzalist.desc}</p>
-          <a href="#" className="btn btn-primary">Comprar</a>
+          <button className="btn btn-primary" onClick={volver}>Volver</button>
         </div>
       </div>
     </div>

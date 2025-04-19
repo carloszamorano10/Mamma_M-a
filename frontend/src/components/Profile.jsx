@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { GlobalContext } from '../context/GlobalContext';
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
 
 export const Profile = () => {
   const navegar = useNavigate();
-  const {user, direccion, setDireccion, setUser} = useContext(GlobalContext)
+  const {user, direccion, setDireccion, setUser, setUserIsLogged} = useContext(GlobalContext)
 
   const logout = ()=>{
     Swal.fire({

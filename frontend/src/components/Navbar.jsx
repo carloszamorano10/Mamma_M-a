@@ -1,12 +1,22 @@
 import React, { useContext } from 'react'
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { GlobalContext } from '../context/GlobalContext';
-
+import Swal from 'sweetalert2';
 
 
 function Navbar() {
-  const { totalCart, userIsLogged } = useContext(GlobalContext)
-
+  const { totalCart, userIsLogged, setUserIsLogged, setDireccion, setUser } = useContext(GlobalContext);
+  const navegar = useNavigate();
+  const logout = ()=>{
+    Swal.fire({
+                icon: "success",
+                text: "Logout existoso, nos vemos!",
+              });
+        setDireccion({});
+        setUser("");
+        setUserIsLogged(false);
+        navegar("/login");
+  }
    const validaRoot = ({ isActive }) => isActive? "text-decoration-none text-warning" : "text-decoration-none text-light"
   return (
 <nav class="navbar navbar-expand-lg bg-body-tertiary pt-0 pb-0">
@@ -27,7 +37,7 @@ function Navbar() {
           <NavLink className={validaRoot} text-light to="/profile">🪪Profile</NavLink>
         </li>
         <li class="nav-item">
-          <NavLink className={validaRoot} text-light href="#">🔓Log Out</NavLink>
+          <NavLink className={validaRoot} text-light onClick={logout}>🔓Log Out</NavLink>
         </li>
        </> :
        <>

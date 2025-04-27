@@ -1,52 +1,25 @@
 import { useContext, useState } from "react"
 import React from 'react'
-import Swal from 'sweetalert2'
-import { useNavigate } from "react-router-dom"
 import { GlobalContext } from "../context/GlobalContext"
+
 
 const Login = () => {
 
-    const [form, setForm] = useState({
-        email: '',
-        password: '',
-    })
-    const {setUser, setUserIsLogged} = useContext(GlobalContext)
-    const navegar = useNavigate();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const {handleLogin} = useContext(GlobalContext);
 
-    const handleChange = (event)=>{
-        setForm({
-            ...form,
-            [event.target.name]: event.target.value
-        })
-    }
 
-   const handleSubmit = (e) =>{
-     e.preventDefault()
-     if (form.email === "" || form.password === "") {
-        Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Todos los campos son obligatorios",
-          });
-        return;
-      }
-      if (form.password.length < 6) {
-        Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "La contraseña debe tener 6 caracteres mínimo",
-          });
-        return;
-      }
-      Swal.fire({
-        icon: "success",
-        text: "Registro exitoso",
-      })
-      setUser({email: form.email, password: form.password});
-      setUserIsLogged(true);
-      navegar("/");
-      
-   }
+   
+
+    const handleSubmit = async (e) =>{
+         e.preventDefault();
+         await handleLogin(email, password);
+          
+       }
+   
+
+   
 
   return (
     <>
@@ -60,8 +33,8 @@ const Login = () => {
                  aria-label="Sizing example input" 
                  aria-describedby="inputGroup-sizing-default" 
                  name="email" 
-                 value={form.email}
-                 onChange={handleChange}
+                 value={email}
+                 onChange={(e) => setEmail(e.target.value)}
                  />
             </div>
             <div class="input-group mb-3">
@@ -71,8 +44,8 @@ const Login = () => {
                  aria-label="Sizing example input" 
                  aria-describedby="inputGroup-sizing-default" 
                  name="password"
-                 value={form.password}
-                 onChange={handleChange}
+                 value={password}
+                 onChange={(e) => setPassword(e.target.value)}
                  />
             </div>
        

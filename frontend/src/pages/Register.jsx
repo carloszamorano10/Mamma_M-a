@@ -5,11 +5,11 @@ import { useContext, useState } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 
 
+
 const Register = () => {
 
 
-  const {setUser, setUserIsLogged, setDireccion} = useContext(GlobalContext)
-  
+  const {setUser, setDireccion, setUserIsLogged} = useContext(GlobalContext)  
 
     const [form, setForm] = useState({
         email: '',

@@ -2,8 +2,9 @@ import React, { useContext, useState } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 import { useNavigate } from 'react-router-dom';
 
+
 const Cart = () => {
-  const { carrito, setCarrito, userIsLogged } = useContext(GlobalContext);
+  const { carrito, setCarrito, userIsLogged} = useContext(GlobalContext);
   const [isProcessing, setIsProcessing] = useState(false);
   const navigate = useNavigate();
 

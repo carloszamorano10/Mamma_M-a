@@ -24,9 +24,33 @@ const Cart = () => {
 
 
   const handleCheckout = async () => {
-    setIsProcessing(true);
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    navigate('/');
+    setIsProcessing(true);  
+    try {
+      const response = await fetch("http://localhost:5000/api/checkout", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify({ items: carrito }),
+      });
+  
+      if (!response.ok) {
+        const errorData = await response.json(); 
+        throw new Error(errorData.error || 'Error desconocido');
+      }
+  
+      const data = await response.json();
+      console.log('Checkout exitoso:', data);
+      setCarrito([]);
+      navigate('/'); 
+  
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Ocurrió un error al procesar tu pago: ' + error.message);
+    } finally {
+      setIsProcessing(false); 
+    }
   };
 
   const totalItems = carrito.reduce((acc, item) => acc + (item.quantity || 1), 0);

@@ -12,7 +12,6 @@ const GlobalProvider = ({children}) => {
     const [userIsLogged, setUserIsLogged] = useState(() => {
       return Boolean(localStorage.getItem('token'));
     });
-    const [direccion, setDireccion] = useState({});
 
      const getPizzas = async () => {
        const response = await fetch("http://localhost:5000/api/pizzas");
@@ -104,7 +103,44 @@ const GlobalProvider = ({children}) => {
       }
     };
   
- 
+    const handleRegister = async (email, password) => {
+      try {
+        const response = await fetch("http://localhost:5000/api/auth/register", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({email, password}),
+        });
+  
+        const data = await response.json();
+        
+        if (data?.error) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: `${data.error}`,
+          });
+          return false;
+        }
+        
+        Swal.fire({
+          icon: "success",
+          text: "Registro exitoso",
+        });
+        localStorage.setItem("token", data.token);
+        setUserIsLogged(true);
+        navegar("/");
+        return true;
+        
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Ocurrió un error al intentar registrarte",
+        });
+        return false;
+      }
+    };
+     
     const handleLogout2 = () => {
       Swal.fire({
         icon: "success",
@@ -120,7 +156,7 @@ const GlobalProvider = ({children}) => {
   
 
     return(
-        <GlobalContext.Provider value={{pizzalist, getPizzas, carrito, setCarrito, totalCart, user, setUser, userIsLogged, setUserIsLogged, direccion, setDireccion, handleLogin, fetchUserData, handleLogout2}}>
+        <GlobalContext.Provider value={{pizzalist, getPizzas, carrito, setCarrito, totalCart, user, setUser, userIsLogged, setUserIsLogged, handleLogin, fetchUserData, handleLogout2, handleRegister}}>
             {children}
         </GlobalContext.Provider>
     )

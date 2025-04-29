@@ -11,8 +11,8 @@ function Navbar() {
  
    const validaRoot = ({ isActive }) => isActive? "text-decoration-none text-warning" : "text-decoration-none text-light"
   return (
-<nav class="navbar navbar-expand-lg bg-body-tertiary pt-0 pb-0">
-  <div class="container-fluid bg-dark p-3">
+<nav className="navbar navbar-expand-lg bg-body-tertiary pt-0 pb-0">
+  <div className="container-fluid bg-dark p-3">
     <NavLink className="text-decoration-none text-light fs-4 me-3" to="/">Pizzería Mamma Mía</NavLink>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
@@ -25,18 +25,18 @@ function Navbar() {
 
         {userIsLogged ? 
        <>
-       <li class="nav-item">
+       <li className="nav-item">
           <NavLink className={validaRoot} text-light to="/profile">🪪Profile</NavLink>
         </li>
-        <li class="nav-item">
+        <li className="nav-item">
           <NavLink className={validaRoot} text-light onClick={handleLogout2}>🔓Log Out</NavLink>
         </li>
        </> :
        <>
-       <li class="nav-item">
+       <li className="nav-item">
           <NavLink className={validaRoot} text-light to="/login">🔒Login</NavLink>
         </li>
-        <li class="nav-item">
+        <li className="nav-item">
           <NavLink className={validaRoot} text-light to="/register">🔒Register</NavLink>
         </li>
        </>   
@@ -44,7 +44,7 @@ function Navbar() {
       </ul>
       
     </div>
-        <li class="nav-item d-flex justify-content-end ">
+        <li className="nav-item d-flex justify-content-end ">
           <NavLink className={validaRoot} to="/cart">🛒Total: {totalCart}</NavLink>
         </li>      
   </div>

@@ -1,6 +1,6 @@
 
-import Swal from 'sweetalert2'
-import { useNavigate } from "react-router-dom"
+
+
 import { useContext, useState } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 
@@ -9,61 +9,20 @@ import { GlobalContext } from '../context/GlobalContext';
 const Register = () => {
 
 
-  const {setUser, setDireccion, setUserIsLogged} = useContext(GlobalContext)  
+  const {handleRegister} = useContext(GlobalContext)  
 
-    const [form, setForm] = useState({
-        email: '',
-        password: '',
-        pass: '',
-        direccion:''
-    })
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [password2, setPassword2] = useState("");
 
-    const navegar = useNavigate();
 
-    const handleChange = (event)=>{
-        setForm({
-            ...form,
-            [event.target.name]: event.target.value
-        })
+
+
+    const handleSubmit = async (e) =>{
+      e.preventDefault();
+      await handleRegister(email, password);
+       
     }
-
-   const handleSubmit = (e) =>{
-     e.preventDefault()
-     if (form.email === "" || form.password === "" || form.pass === "") {
-        Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Todos los campos son obligatorios",
-          });
-        return;
-      }
-      if (form.password.length < 6) {
-        Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "La contraseña debe tener 6 caracteres mínimo",
-          });
-        return;
-      }
-      if (form.password !== form.pass) {
-        Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Ambas contraseñas deben ser iguales",
-          });
-        return;
-      }
-      Swal.fire({
-        icon: "success",
-        text: "Registro exitoso",
-      })
-      setUser({email: form.email, password: form.password});
-      setUserIsLogged(true);
-      setDireccion({direccion: form.direccion})
-      navegar("/");
-      
-      ;
-   }
 
   return (
     <>
@@ -77,8 +36,8 @@ const Register = () => {
                  aria-label="Sizing example input" 
                  aria-describedby="inputGroup-sizing-default" 
                  name="email" 
-                 value={form.email}
-                 onChange={handleChange}
+                 value={email}
+                 onChange={(e) => setEmail(e.target.value)}
                  />
             </div>
             <div className="input-group mb-3">
@@ -88,8 +47,8 @@ const Register = () => {
                  aria-label="Sizing example input" 
                  aria-describedby="inputGroup-sizing-default" 
                  name="password"
-                 value={form.password}
-                 onChange={handleChange}
+                 value={password}
+                 onChange={(e) => setPassword(e.target.value)}
                  />
             </div>
             <div className="input-group mb-3">
@@ -99,21 +58,11 @@ const Register = () => {
                  aria-label="Sizing example input" 
                  aria-describedby="inputGroup-sizing-default" 
                  name="pass"
-                 value={form.pass}
-                 onChange={handleChange}
+                 value={password2}
+                 onChange={(e) => setPassword2(e.target.value)}
                  />
             </div>
-            <div className="input-group mb-3">
-                 <span className="input-group-text" id="inputGroup-sizing-default">Dirección</span>
-                 <input type="text" 
-                 className="form-control" 
-                 aria-label="Sizing example input" 
-                 aria-describedby="inputGroup-sizing-default" 
-                 name="direccion"
-                 value={form.direccion}
-                 onChange={handleChange}
-                 />
-            </div>
+           
             
         </div>
         <button onClick={handleSubmit} className="btn btn-primary">Enviar</button>

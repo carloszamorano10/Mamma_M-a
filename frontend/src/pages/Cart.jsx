@@ -1,12 +1,15 @@
 import React, { useContext, useState } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 import { useNavigate } from 'react-router-dom';
-
+import Swal from 'sweetalert2';
 
 const Cart = () => {
-  const { carrito, setCarrito, userIsLogged} = useContext(GlobalContext);
+  const { carrito, setCarrito, user, userIsLogged } = useContext(GlobalContext);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
+
+  
 
   const modificarCantidad = (id, cambio) => {
     setCarrito(prev => 
@@ -22,17 +25,30 @@ const Cart = () => {
     );
   };
 
+ console.log("carrito", carrito)
 
   const handleCheckout = async () => {
     setIsProcessing(true);  
+    
+    const orderData = {
+      items: carrito.map(item => ({
+        productId: item.id,
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity || 1,
+        img: item.img
+      })),
+      total: carrito.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0)
+    };
+
     try {
-      const response = await fetch("http://localhost:5000/api/checkout", {
+      const response = await fetch("http://localhost:5000/api/checkouts", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
-        body: JSON.stringify({ items: carrito }),
+        body: JSON.stringify(orderData),
       });
   
       if (!response.ok) {
@@ -42,6 +58,12 @@ const Cart = () => {
   
       const data = await response.json();
       console.log('Checkout exitoso:', data);
+      Swal.fire({
+        icon: 'success',
+        title: '¡Compra Exitosa!',
+        text: 'Tu pedido ha sido realizado con éxito. Gracias por tu compra.',
+        confirmButtonText: 'Aceptar'
+      });
       setCarrito([]);
       navigate('/'); 
   
